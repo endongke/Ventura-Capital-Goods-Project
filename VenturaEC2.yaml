@@ -1,0 +1,167 @@
+Parameters: 
+  ExportVpcStackName:
+    Description: The name of the vpc Stack that exports Values
+    Type: String
+
+  InstanceType:
+    Description: VenturaProd EC2 Instance Type
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t1.micro
+      - t2.nano
+      - t2.micro
+    ConstraintDescription: Must be a valid EC2 instance type.
+
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
+    Type: 'AWS::EC2::KeyPair::KeyName'
+    ConstraintDescription: must be the name of an existing EC2 KeyPair.
+
+  AmazonImageID:
+   Description: The ID of the Amazon machine image (AMI)
+   Type: String
+
+Resources: 
+  EC2Instance1:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      SubnetId:
+        Fn::ImportValue: !Sub ${ExportVpcStackName}-PrivateVenturaProdWebSubnet1
+      SecurityGroupIds:
+        - Fn::ImportValue: !Sub ${ExportVpcStackName}-WebServerSecurityGroup
+      KeyName: !Ref KeyName
+      ImageId: !Ref AmazonImageID
+      Tags:
+        - Key: Name
+          Value: EC2 | Private VenturaProdWeb Tier 1 
+
+      UserData: 
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            Sudo Su
+            yum update -y
+            yum install -y httpd
+            echo "Healthy" >/var/www/html/index.html
+            service httpd start
+
+  EC2Instance2:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      SubnetId:
+        Fn::ImportValue: !Sub ${ExportVpcStackName}-PrivateVenturaProdWebSubnet2
+      SecurityGroupIds:
+        - Fn::ImportValue: !Sub ${ExportVpcStackName}-WebServerSecurityGroup
+      KeyName: !Ref KeyName
+      ImageId: !Ref AmazonImageID
+      Tags:
+        - Key: Name
+          Value: EC2 | Private VenturaProdWeb Tier 2
+
+      UserData: 
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            Sudo Su
+            yum update -y
+            yum install -y httpd
+            echo "Healthy" >/var/www/html/index.html
+            service httpd start
+ EC2Instance3:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      SubnetId:
+        Fn::ImportValue: !Sub ${ExportVpcStackName}-PrivateVenturaProdWebSubnet1
+      SecurityGroupIds:
+        - Fn::ImportValue: !Sub ${ExportVpcStackName}-WebServerSecurityGroup
+      KeyName: !Ref KeyName
+      ImageId: !Ref AmazonImageID
+      Tags:
+        - Key: Name
+          Value: EC2 | Private VenturaProdWeb Tier 3
+
+      UserData: 
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            Sudo Su
+            yum update -y
+            yum install -y httpd
+            echo "Healthy" >/var/www/html/index.html
+            service httpd start
+
+  EC2Instance4:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      SubnetId:
+        Fn::ImportValue: !Sub ${ExportVpcStackName}-PrivateVenturaProdWebSubnet2
+      SecurityGroupIds:
+        - Fn::ImportValue: !Sub ${ExportVpcStackName}-WebServerSecurityGroup
+      KeyName: !Ref KeyName
+      ImageId: !Ref AmazonImageID
+      Tags:
+        - Key: Name
+          Value: EC2 | Private VenturaProdWeb Tier 4
+
+      UserData: 
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            Sudo Su
+            yum update -y
+            yum install -y httpd
+            echo "Healthy" >/var/www/html/index.html
+            service httpd start  
+
+  EC2Instance5:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      SubnetId:
+        Fn::ImportValue: !Sub ${ExportVpcStackName}-PrivateVenturaProdWebSubnet1
+      SecurityGroupIds:
+        - Fn::ImportValue: !Sub ${ExportVpcStackName}-WebServerSecurityGroup
+      KeyName: !Ref KeyName
+      ImageId: !Ref AmazonImageID
+      Tags:
+        - Key: Name
+          Value: EC2 | Private VenturaProdWeb Tier 5
+
+      UserData: 
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            Sudo Su
+            yum update -y
+            yum install -y httpd
+            echo "Healthy" >/var/www/html/index.html
+            service httpd start
+
+  EC2Instance6:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      SubnetId:
+        Fn::ImportValue: !Sub ${ExportVpcStackName}-PrivateVenturaProdWebSubnet2
+      SecurityGroupIds:
+        - Fn::ImportValue: !Sub ${ExportVpcStackName}-WebServerSecurityGroup
+      KeyName: !Ref KeyName
+      ImageId: !Ref AmazonImageID
+      Tags:
+        - Key: Name
+          Value: EC2 | Private VenturaProdWeb Tier 6
+
+      UserData: 
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            Sudo Su
+            yum update -y
+            yum install -y httpd
+            echo "Healthy" >/var/www/html/index.html
+            service httpd start            

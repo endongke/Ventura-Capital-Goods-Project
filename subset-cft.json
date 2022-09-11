@@ -1,0 +1,32 @@
+{
+"AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "",
+    "Metadata": {
+
+    },
+    "Parameters": {
+    
+    },
+    "Mappings": {
+
+    },
+    "Conditions": {
+
+    },
+    "Resources": {
+        "jjtechsubset": {
+          "Type": "AWS::EC2::Subnet",
+          "Properties": {
+            "AvailabilityZone": "us-east-1a",
+            "VpcId": "vpc-0bde74b75a8b2f91e",
+            "CidrBlock": "172.31.256.0/24",
+            "Tags":[
+            { "Key": "Name", "Value":  "Public Subnet 3" }
+            ]
+          }
+        }
+    },
+    "Outputs": {
+
+    }
+}
